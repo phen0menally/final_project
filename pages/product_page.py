@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from .locators import CartPageLocators
+from .locators import CartPageLocators, ProductPageLocators
 from .base_page import BasePage
 
 
@@ -26,4 +26,6 @@ class ProductPage(BasePage):
         print(message_basket_total.text)
         assert product_price.text == message_basket_total.text, "Цена книги не совпадает с стоимостью корзины"
 
-
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
